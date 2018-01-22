@@ -1,0 +1,28 @@
+<html>
+<body>
+<pre>
+    // all the variable should start with $
+    $!{value1}
+    // if the value2 doesnt exist, than value2 must be blank
+    ${value2}
+
+    colors: $!{colors}
+    // can use for each to iterative to operate
+    #foreach($color in $colors)
+        This is the color $!{foreach.index}: $color, ${foreach.count}
+    #end
+
+    // the operation used here are all belong to java syntax
+    User: $!{user}
+    User: $!{user.name} // try to call user.getName() or user.isName() if exists
+
+
+    #set($title = "baby_title")
+    Title: $!{title}
+
+
+    Parse: #parse("header.html") // "baby_title"
+    Include: #include("header.html") // "$title"
+</pre>
+</body>
+</html>
