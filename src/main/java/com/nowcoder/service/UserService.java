@@ -5,6 +5,8 @@ import com.nowcoder.dao.UserDAO;
 import com.nowcoder.model.LoginTicket;
 import com.nowcoder.model.User;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import java.util.*;
 
 @Service
 public class UserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
 
     @Autowired
     private UserDAO userDAO;
@@ -62,7 +67,7 @@ public class UserService {
             return map;
         }
         if (StringUtils.isBlank(password)) {
-            map.put("msg", "pass word can not be empty");
+            map.put("msg", "password can not be empty");
             return map;
         }
 
@@ -70,6 +75,7 @@ public class UserService {
         User user = userDAO.selectByName(username);
         if (user == null) {
             map.put("msg", "this user doesnt exist");
+            logger.info(user.toString());
             return map;
         }
 
@@ -106,5 +112,10 @@ public class UserService {
 
     public User getUser(int id) {
         return userDAO.selectByID(id);
+    }
+
+    public void logout(String ticket) {
+        // status 1 = invalid ticket
+        loginTicketDAO.updateStatus(ticket, 1);
     }
 }

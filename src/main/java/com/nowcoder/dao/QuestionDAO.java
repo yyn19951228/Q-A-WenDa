@@ -19,6 +19,9 @@ public interface QuestionDAO {
     int addQuestion(Question question);
 
 
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where id=#{id}"})
+    Question selectById(int id);
+
     // use method defined by xml
     // the .xml file should have the same name like this interface
     // the namesapce of .xml file should be the path of this DAO file
