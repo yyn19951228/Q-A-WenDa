@@ -114,6 +114,10 @@ public class UserService {
         return userDAO.selectByID(id);
     }
 
+    public User selectByName(String name) {
+        return userDAO.selectByName(name);
+    }
+
     public void logout(String ticket) {
         // status 1 = invalid ticket
         loginTicketDAO.updateStatus(ticket, 1);

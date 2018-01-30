@@ -40,7 +40,7 @@ public class SensitiveService implements InitializingBean{
     public String filter(String text) {
         if (StringUtils.isBlank(text)) {
             return text;
-        }c
+        }
 
         StringBuilder result = new StringBuilder();
         /*

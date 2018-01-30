@@ -14,7 +14,8 @@ public interface QuestionDAO {
 
     // here fill in sql command
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS, ") " +
-            "values(#{title}, #{content}, #{createdDate}, #{userId}, #{commentCount})"}) // the reason use headUrl is because of
+            "values(#{title}, #{content}, #{createdDate}, #{userId}, #{commentCount})"})
+    // the reason use headUrl is because of
     //  <setting name="mapUnderscoreToCamelCase" value="true"/> in mybatis-config.xml
     int addQuestion(Question question);
 
@@ -29,5 +30,8 @@ public interface QuestionDAO {
     List<Question> selectLatestQuestions(@Param("userId") int userId,
                                          @Param("offset") int offset,
                                          @Param("limit") int limit);
+
+    @Update({"update ", TABLE_NAME, " set comment_count = #{commentCount} where id=#{id}"})
+    int updateCommentCount(@Param("id") int id, @Param("commentCount") int commentCount);
 
 }
