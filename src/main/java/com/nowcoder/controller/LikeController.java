@@ -22,7 +22,7 @@ public class LikeController {
     HostHolder hostHolder;
 
     @Autowired
-    private LikeService likeService;
+    LikeService likeService;
 
     @RequestMapping(value = "/like", method = RequestMethod.POST)
     @ResponseBody
@@ -30,8 +30,8 @@ public class LikeController {
         if (hostHolder.getUser() == null) {
             return WendaUtil.getJSONString(999);
         }
-
         long likeCount = likeService.like(hostHolder.getUser(). getId(), EntityType.ENTITY_COMMENT, commentId);
+        logger.info(String.valueOf(likeCount));
         return WendaUtil.getJSONString(0, String.valueOf(likeCount));
     }
 
